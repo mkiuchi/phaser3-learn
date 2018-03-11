@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8"/>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.0.0/dist/phaser.min.js"></script>
+    <!--
+        16x16のスプライトが上から下に動くだけ。
+        一定時間ごとにイベントが発火して、スプライトの位置を変更している。
+    -->
+</head>
+<body>
+
+    <script>
+    var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.setBaseURL('http://labs.phaser.io');
+
+        this.load.image('16dot', 'assets/sprites/16x16.png');
+    }
+
+    var dot;
+    var cnt = 0;
+    var cntText;
+    var timedEvent;
+
+    function create ()
+    {
+        dot = this.add.sprite(300,200, '16dot');
+
+        cntText = this.add.text(32,32);
+
+        // addEvent 所定時間(単位=ms)毎に関数を実行
+        timedEvent = this.time.addEvent({delay: 25, callback: updateCounter, callbackScope: this, loop: true});
+        // delayedCall 所定時間が経過したら1回だけ関数を実行
+        // timedEvent = this.time.delayedCall(1000, updateCounter, [], this);
+
+    }
+
+    function updateCounter() {
+        cnt++;
+        if (cnt > (600-32)) {
+            cnt = 0;
+        }
+        //console.log(cnt);
+    }
+    function update ()
+    {
+        cntText.setText('カウンター: ' + cnt.toString());
+        dot.y = 32+cnt;
+    }
+    </script>
+
+</body>
+</html>
