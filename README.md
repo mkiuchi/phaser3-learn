@@ -12,6 +12,16 @@
 
 APIリファレンス: まだよくわからん。 https://github.com/photonstorm/phaser3-docs にいろいろあるんだけど使い方がよくわからん
 
+## 実行方法とか
+
+ディレクトリに入って
+
+```
+$ python3 -m http.server
+```
+
+ブラウザで http://localhost:8000/tutorial-1.html とか開けばOK
+
 ## 履歴とか
 
 tutorial-1.html: https://phaser.io/tutorials/getting-started-phaser3 そのまんま
